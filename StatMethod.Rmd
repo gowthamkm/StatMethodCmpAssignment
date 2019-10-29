@@ -17,13 +17,18 @@ hist(rgamma(10000,shape = 40,scale = 1),breaks = 100,main = expression(paste("Ga
 hist(rgamma(10000,shape = 80,scale = 1),breaks = 100,main = expression(paste("Gamma Distribution ",alpha,"=",80," ",beta,"=",1)))
 ```
 
-**a** What do you observe about the shapes of these three density functions? Which are less skewed and more symmetric? 
+**(a)** What do you observe about the shapes of these three density functions? Which are less skewed and more symmetric? 
+
 Gamma distribution for constant beta value, as the alpha increases becomes less skewed,For alpha 40 and 80 it get more symmetric as compared to alpha=1.
 
-**b** What differences do you observe about the location of the centers of these density functions?
-Location of centers correspond to shape(alpha) parameter in the density function, its centered around alpha.
+**(b)** What differences do you observe about the location of the centers of these density functions?
 
-**c** Give an explanation for what you observed in part (b)
+Location of centers correspond to shape(alpha) parameter in the density function, its centered around alpha and its porportional to it.
+
+**(c)** Give an explanation for what you observed in part (b)
+
+As the alpha increases location centers increase.
+
 
 
 # 4.117 Beta Distribution
@@ -35,13 +40,15 @@ lines(dbeta(p,shape1 =10, shape2 =7),type ="l", col=3)
 lines(dbeta(p,shape1 =12, shape2 =7),type ="l", col=4)
 legend(0.1,2.3, c("Beta(9,7)","Beta(10,7)", "Beta(12,7)"),lty=c(1,1,1),col=c(2,3,4))
 ```
-**a** Are these densities symmetric? Skewed left? Skewed right?
+**(a)** Are these densities symmetric? Skewed left? Skewed right?
+
 These densities are skewed right, they are not symmetric.
 
-**b** What do you observe as the value of α gets closer to 12?
-As α gets closer to 12,the values are less spread out (more concentrated).
+**(b)** What do you observe as the value of α gets closer to 12?
 
-**c** Graph some more beta densities with α > 1,β> 1, and α>β. What do you conjecture about the shape of beta densities with α>β and both α > 1 and β > 1? 
+As α gets closer to 12,the values are less spread out (more concentrated and symmetric).
+
+**(c)** Graph some more beta densities with α > 1,β> 1, and α>β. What do you conjecture about the shape of beta densities with α>β and both α > 1 and β > 1? 
 
 ```{r}
 p=seq(0,1,length.out = 100)
@@ -55,8 +62,7 @@ legend(0.1,2.3, c("Beta(10,7)","Beta(20,7)", "Beta(7,10)","Beta(7,20)"),lty=c(1,
 For α > 1,β> 1 it can be observed that, for constant β value increasing α value results in distribution skewed towards right
 While for constant α value, increasing β has distribution skewed towards left.
 
-Now, for α>β
-
+Now, for α>β,
 when α > 1,β> 1, It can be observed that when α is increasing its skewed towards right, and the dispersion is less.It becomes more focused.
 
 ```{r}
@@ -69,11 +75,87 @@ legend(0.1,2.3, c("Beta(0.9,0.7)","Beta(0.9,0.07)"),lty=c(1,1),col=c(2,3))
 when, 0< β< α < 1, The distribution has exponential behavior.When the difference between them is large, it grows even faster.
 
 
-# 4.118
-#Applet Exercise Use the applet Comparison of Beta Density Functions to compare beta density functions
-# with (α = .3, β = 4), (α = .3, β = 7), and (α = .3, β = 12). a Are these densities symmetric? Skewed left? Skewed right?
-# b What do you observe as the value of β gets closer to 12?
-#   c Which of these beta distributions gives the highest probability of observing a value larger than 0.2? d Graph some more beta densities with α < 1 and β > 1. 
-# What do you conjecture about the shape of beta densities with α < 1 and β > 1?
+# 4.118  Beta Density Functions
+
+```{r}
+p=seq(0,1,length.out = 100)
+plot(dbeta(p,shape1 =0.3, shape2 =4), ylab="density",type ="l", col=2)
+lines(dbeta(p,shape1 =0.3, shape2 =7),type ="l", col=3)
+lines(dbeta(p,shape1 =0.3, shape2 =12),type ="l", col=4)
+legend(60,10, c("Beta(0.3,4)","Beta(0.3,7)", "Beta(0.3,12)"),lty=c(1,1,1),col=c(2,3,4))
+```
+
+**(a)** Are these densities symmetric? Skewed left? Skewed right?
+
+Here densities are skewed right.
+
+**(b)** What do you observe as the value of β gets closer to 12?
+
+As value of β gets closer to 12 the curve is get more sharper with less spread.And for higher value of β, it acts as signum function
+
+**(c)** Which of these beta distributions gives the highest probability of observing a value larger than 0.2? 
+```{r}
+pbeta(0.2, shape1=0.3, shape2=4,lower.tail = FALSE)
+pbeta(0.2, shape1=0.3, shape2=7,lower.tail = FALSE)
+pbeta(0.2, shape1=0.3, shape2=12,lower.tail = FALSE)
+```
+For alpha=0.3 and beta=4 distribution has higest probability of observing value larger than 0.2
+
+**(d)** Graph some more beta densities with α < 1 and β > 1. 
+
+```{r}
+p=seq(0,1,length.out = 100)
+plot(dbeta(p,shape1 =0.3, shape2 =4), ylab="density",type ="l", col=2)
+lines(dbeta(p,shape1 =0.03, shape2 =4),type ="l", col=3)
+lines(dbeta(p,shape1 =0.003, shape2 =4),type ="l", col=4)
+legend(60,10, c("Beta(0.3,4)","Beta(0.3,7)", "Beta(0.3,12)"),lty=c(1,1,1),col=c(2,3,4))
+```
+What do you conjecture about the shape of beta densities with α < 1 and β > 1?
+
+All of these have similar shape but by reducing α by factor of 10, made the curve sharper.
 
 
+
+
+
+
+
+
+# 10.19  Hypothesis Testing
+
+The output voltage for an electric circuit is specified to be 130.
+A sample of 40 independent readings on the voltage for this circuit gave a sample mean 128.6 and standard deviation 2.1.
+Test the hypothesis that the average output voltage is 130 against the alternative that it is less than 130. Use a test with level .05.
+
+```{r}
+
+n=40
+m=128.6
+sd=2.1
+mean=130
+#Ho: mean=130, Ha: mean<130
+z=(m-mean)/(sd/sqrt(n))
+```
+# 10.21 
+
+# 11.31
+
+```{r}
+x<-c(19.1,38.2,57.3,76.2,95,114,131,150,170)
+y<-c(0.095,0.174,0.256,0.348,0.429,0.5,0.58,0.651,0.722)
+summary(lm(y~x))
+```
+
+# 11.69
+
+
+```{r}
+x<-c(-7,-5,-3,-1,1,3,5,7)
+y<-c(18.5,22.6,27.2,31.2,33,44.9,49.4,35)
+
+#a)linear
+lm(y~x)
+
+#b)quadratic
+lm(y~x+I(x^2))
+```
