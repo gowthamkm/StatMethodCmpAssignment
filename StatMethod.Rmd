@@ -124,16 +124,21 @@ The output voltage for an electric circuit is specified to be 130.
 A sample of 40 independent readings on the voltage for this circuit gave a sample mean 128.6 and standard deviation 2.1.
 Test the hypothesis that the average output voltage is 130 against the alternative that it is less than 130. Use a test with level .05.
 
+Ho:mean=130
+
+Ha:mean<130
+
 ```{r}
 
 n=40
 m=128.6
 sd=2.1
 mean=130
-#Ho: mean=130, Ha: mean<130
-z=(m-mean)/(sd/sqrt(n))
-z
+Z=(m-mean)/(sd/sqrt(n))
+Z
 ```
+For α = .05, we have -z(α)=-1.645. As |Z|>z. we reject Ho.
+
 # 10.21 Shear strength Hypothesis Testing
 
 Shear strength measurements derived from unconfined compression tests for two types of soils gave the results shown in the following table (measurements in tons per square foot). Do the soils appear to differ with respect to average shear strength, at the 1% significance level?
@@ -161,16 +166,20 @@ As Z>z, we can reject the hypothesis that they have the same shear strength.
 
 # 11.31 Nickel Concentration
 
-α<-0.05
+Using a chemical procedure called differential pulse polarography, a chemist measured the peak current generated (in microamperes, μA) when solutions containing different amounts of nickel (measured in parts per billion, ppb) are added to different portions of the same buffer.Is there sufficient evidence to indicate that peak current increases as nickel concentrations increase? Use α = .05.
+
+Ho: peak current doesn't increase (i.e. constant or decreases) (y=constant) with increase in nickel concentration
+Ha: peak current increases with increase in nickel concentration
+
 ```{r}
 
 x<-c(19.1,38.2,57.3,76.2,95,114,131,150,170)
 y<-c(0.095,0.174,0.256,0.348,0.429,0.5,0.58,0.651,0.722)
 summary(lm(y~x))
 ```
-p-value is  0.007996 which is quite small, Ho: 
+Here p-value is (2.372e-11)/2 (two-tailed) which is quite small we can reject the Ho here.
 
-# 11.69
+# 11.69 Lexus Automobile modeling
 
 **(a)** fit the model Y = β0 + β1*x + ε.
 
